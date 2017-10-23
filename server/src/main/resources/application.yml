@@ -1,2 +1,28 @@
 server:
   port: 8001
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/comjwt?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;useSSL=false
+    username: root
+    password: 123456
+    dbcp2:
+      test-while-idle: true
+      validation-query: SELECT 1
+  jackson:
+    serialization: true
+mybatis:
+  type-aliases-package: com.spring.boot.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mapper:
+  mappers: com.spring.boot.mapper.CommonMapper
+  identity: MYSQL
+  not-empty: false
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+logging:
+  level: debug
