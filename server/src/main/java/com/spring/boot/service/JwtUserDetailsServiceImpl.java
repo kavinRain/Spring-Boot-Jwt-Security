@@ -16,7 +16,12 @@ public class JwtUserDetailsServiceImpl extends BaseService<SysUser> implements U
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
+            buildUserResources(user);
             return JwtUserFactory.create(user);
         }
+    }
+
+    private void buildUserResources(SysUser user) {
+
     }
 }
