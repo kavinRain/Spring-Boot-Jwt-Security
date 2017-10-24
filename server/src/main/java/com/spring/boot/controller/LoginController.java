@@ -16,13 +16,6 @@ import java.util.Map;
 @Api("LoginController.Api")
 public class LoginController {
 
-
-    @Value("${jwt.header}")
-    private String tokenHeader;
-
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-
     @Autowired
     private AuthService authService;
 
