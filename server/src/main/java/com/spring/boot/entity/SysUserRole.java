@@ -9,4 +9,11 @@ public class SysUserRole {
     private Long userId;
 
     private Integer roleId;
+
+    public SysUserRole(Long userId) {
+        this.userId = userId;
+    }
+
+    public SysUserRole() {
+    }
 }

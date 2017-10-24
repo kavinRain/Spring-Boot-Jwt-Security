@@ -2,6 +2,7 @@ package com.spring.boot.entity;
 
 import lombok.Data;
 
+import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 public class SysUser implements Serializable {
 
+    @Id
     private Long id;
 
     private String username;

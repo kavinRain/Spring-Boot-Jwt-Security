@@ -26,3 +26,10 @@ pagehelper:
   params: count=countSql
 logging:
   level: debug
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer"
+

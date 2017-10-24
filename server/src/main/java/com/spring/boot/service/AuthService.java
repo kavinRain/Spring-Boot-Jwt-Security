@@ -1,31 +1,36 @@
 package com.spring.boot.service;
 
+import com.google.common.collect.Maps;
 import com.spring.boot.util.JwtTokenUtil;
+import com.spring.boot.vo.JwtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class AuthService {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private AuthenticationManager authenticationManager;
 
 
-    public String login(String username, String password) {
+    public Map<String, Object> login(String username, String password) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        final String token = JwtTokenUtil.generateToken(userDetails);
-        return token;
+        JwtUser jwtUser = (JwtUser)authentication.getPrincipal();
+        final String token = jwtTokenUtil.generateToken(jwtUser);
+        Map<String,Object> result = Maps.newHashMap();
+        result.put("token",token);
+        result.put("user",jwtUser);
+        return result;
     }
 }
